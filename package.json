@@ -1,0 +1,73 @@
+{
+  "scripts": {
+    "dev": "NODE_ENV=dev vite",
+    "start": "node dist/api.js",
+    "build": "nest build",
+    "test": "vitest --run",
+    "docs": "compodoc -p tsconfig.doc.json -s",
+    "format": "prettier src --write --ignore-unknown",
+    "lint": "eslint src --ext .ts",
+    "prepare": "husky install",
+    "commit": "git add . && git commit -m ''"
+  },
+  "dependencies": {
+    "@fastify/helmet": "^11.0.0",
+    "@fastify/static": "^6.10.2",
+    "@nestjs/cache-manager": "^2.1.0",
+    "@nestjs/common": "^10.1.3",
+    "@nestjs/config": "^3.0.0",
+    "@nestjs/core": "^10.1.3",
+    "@nestjs/platform-fastify": "^10.1.3",
+    "@nestjs/swagger": "^7.1.8",
+    "cache-manager": "^5.2.3",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.0",
+    "fastify": "^4.21.0",
+    "nestjs-cls": "^3.5.0",
+    "rxjs": "^7.8.1",
+    "swagger-ui-dist": "^5.3.1",
+    "type-fest": "^4.2.0"
+  },
+  "devDependencies": {
+    "@compodoc/compodoc": "^1.1.21",
+    "@nestjs/cli": "^10.1.11",
+    "@nestjs/testing": "^10.1.3",
+    "@swc/cli": "^0.1.62",
+    "@swc/core": "1.3.70",
+    "@tsconfig/node-lts": "^18.12.3",
+    "@types/node": "^20.4.9",
+    "@typescript-eslint/eslint-plugin": "^6.3.0",
+    "@typescript-eslint/parser": "^6.3.0",
+    "commitizen": "^4.3.0",
+    "eslint": "^8.47.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^17.1.0",
+    "eslint-config-prettier": "^9.0.0",
+    "git-cz": "^4.9.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.3",
+    "prettier": "^3.0.1",
+    "ts-node": "^10.9.1",
+    "vite": "^4.4.9",
+    "vite-plugin-node": "^3.0.2",
+    "vitest": "^0.34.1"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "eslint --fix",
+      "prettier --write",
+      "bash -c tsc --noEmit",
+      "vitest related --run"
+    ],
+    "*.!ts": "prettier --write --ignore-unknown"
+  },
+  "config": {
+    "commitizen": {
+      "path": "git-cz"
+    }
+  },
+  "engines": {
+    "node": ">=18",
+    "pnpm": ">=8"
+  }
+}
