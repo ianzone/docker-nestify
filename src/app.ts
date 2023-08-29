@@ -109,6 +109,7 @@ export async function createApp() {
   }
 
   // https://helmetjs.github.io/
+  // @ts-ignore
   await app.register(helmet, {
     contentSecurityPolicy: false,
     crossOriginEmbedderPolicy: false,
