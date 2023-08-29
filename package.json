@@ -3,6 +3,9 @@
     "dev": "NODE_ENV=dev vite",
     "start": "node dist/api.js",
     "build": "nest build",
+    "docker:build": "docker build . -t ianzone/nestify:latest",
+    "docker:run": "docker run -d -p 3000:3000 --name nestify ianzone/nestify",
+    "docker:start": "pnpm docker:build && pnpm docker:run",
     "test": "vitest --run",
     "docs": "compodoc -p tsconfig.doc.json -s",
     "format": "prettier src --write --ignore-unknown",
@@ -25,7 +28,6 @@
     "fastify": "^4.22.0",
     "nestjs-cls": "^3.5.0",
     "rxjs": "^7.8.1",
-    "swagger-ui-dist": "^5.4.2",
     "type-fest": "^4.3.1"
   },
   "devDependencies": {

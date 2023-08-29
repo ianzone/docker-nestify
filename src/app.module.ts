@@ -1,9 +1,9 @@
 import { CacheInterceptor, CacheModule } from '@nestjs/cache-manager';
-import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule, UnauthorizedException } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
+import { IncomingMessage, ServerResponse } from 'http';
 import { ClsMiddleware, ClsModule } from 'nestjs-cls';
-import { DocsMiddleware } from 'src/middlewares';
 import { RoutesModule } from 'src/routes';
 import { ServicesModule } from 'src/services';
 import { AppController } from './app.controller';
@@ -57,6 +57,14 @@ export class AppModule implements NestModule {
     // ClsMiddleware has to be mounted first
     consumer.apply(ClsMiddleware).exclude('/docs/(.*)').forRoutes('(.*)');
 
-    consumer.apply(DocsMiddleware).forRoutes('/docs', '/docs/(.*)', '/docs-json');
+    consumer
+      .apply((req: IncomingMessage, res: ServerResponse, next: () => void) => {
+        // @ts-ignore
+        if (req.query?.token !== 'Secure_2023') {
+          throw new UnauthorizedException();
+        }
+        return next();
+      })
+      .forRoutes('/docs', '/docs-json');
   }
 }
